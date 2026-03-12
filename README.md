@@ -61,28 +61,7 @@ Security monitoring is performed using:
 # SOC Monitoring Pipeline
 
 
-|-------------------|
-| Endpoint Activity |
-    | │ |
-    | ▼ | 
-| Logs Generated |
-    | │ |
-    | ▼ | 
-| Wazuh Agents Collect Logs |
-    | │ |
-    | ▼ | 
-| Wazuh Manager Correlates Events |
-    | │ |
-    | ▼ |                                  
-| Security Onion Monitors Network Traffic |
-    | │ |
-    | ▼ | 
-| SOC Analyst Investigates Alerts |
-
-
----
-
-| Endpoint Activity | 
+|Endpoint Activity | 
 |-------------|
 | ▼ | 
 | Logs Generated | 
