@@ -62,23 +62,23 @@ Security monitoring is performed using:
 
 
 |------------------------------------------|
-| Endpoint Activity
-|     │
-|     ▼
-| Logs Generated
-|     │
-|     ▼
-| Wazuh Agents Collect Logs
-|     │
-|     ▼
-| Wazuh Manager Correlates Events
-|     │
-|     ▼
-| Security Onion Monitors Network Traffic
-|     │
-|     ▼
-| SOC Analyst Investigates Alerts
-|-------------------------------------------|
+| Endpoint Activity                        |
+|     │                                    |
+|     ▼                                    | 
+| Logs Generated                           |
+|     │                                    | 
+|     ▼                                    |
+| Wazuh Agents Collect Logs                |
+|     │                                    |
+|     ▼                                    |
+| Wazuh Manager Correlates Events          |
+|     │                                    |
+|     ▼                                    |                                 
+| Security Onion Monitors Network Traffic  |
+|     │                                    |
+|     ▼                                    |
+| SOC Analyst Investigates Alerts          |
+|------------------------------------------|
 
 ---
 
