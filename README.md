@@ -82,16 +82,16 @@ Security monitoring is performed using:
 
 ---
 
-| Technology | Purpose |
-|-------------|-------------|
-| Windows Server 2025 | Domain Controller (Active Directory) |
-| Windows 11 | Domain workstation |
-| Ubuntu Server | Linux monitored endpoint |
-| Kali Linux | Attack simulation platform |
-| Wazuh | SIEM and host detection |
-| Security Onion | Network monitoring platform |
-| Sysmon | Windows endpoint telemetry |
-| Docker | Service containerization |
+| Technology | 
+|-------------|
+| Windows Server 2025 | 
+| Windows 11 | 
+| Ubuntu Server | 
+| Kali Linux |
+| Wazuh | 
+| Security Onion |
+| Sysmon |
+| Docker |
 
 ---
 
