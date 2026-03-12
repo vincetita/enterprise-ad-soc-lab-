@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise AD SOC Lab Portfolio</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2e;
+      --card: rgba(13, 27, 46, 0.78);
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #e5eefc;
+      --muted: #9db0cf;
+      --cyan: #4fd1ff;
+      --blue: #4f7cff;
+      --violet: #8b5cf6;
+      --green: #22c55e;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(79,124,255,.22), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(139,92,246,.18), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(79,209,255,.12), transparent 25%),
+        linear-gradient(180deg, #06101d 0%, #07111f 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(7,17,31,.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #06101d;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 72px 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: var(--cyan);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      max-width: 720px;
+    }
+
+    .cta-row {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #04111d;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(79,124,255,.16), rgba(13,27,46,.9));
+      border: 1px solid rgba(79,209,255,.16);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(79,209,255,.28), transparent 70%);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .metric, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 16px;
+    }
+
+    .metric .value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .metric .label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2.6vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.65;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--cyan);
+      font-size: 12px;
+      margin-bottom: 14px;
+      background: rgba(79,209,255,.06);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    ul.clean {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+    }
+
+    ul.clean li {
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    ul.clean li:first-child { border-top: 0; padding-top: 0; }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 16px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+
+    .timeline-step {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #08111e;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      font-size: 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+    }
+
+    .architecture-box {
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      overflow: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #cddaf4;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+    }
+
+    .footer-card {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid, .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .hero { padding-top: 48px; }
+      .hero-metrics { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-badge">SOC</div>
+        <div>Enterprise AD SOC Lab</div>
+      </div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#detections">Detections</a>
+        <a href="#simulations">Simulations</a>
+        <a href="#recruiters">For Recruiters</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="overview">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Blue Team • Detection Engineering • GitHub Pages Ready</div>
+        <h1>Enterprise Active Directory SOC Lab Portfolio</h1>
+        <p class="lead">
+          A recruiter-focused cybersecurity portfolio showcasing a full SOC lab with <strong>Wazuh</strong>,
+          <strong>Security Onion</strong>, <strong>Sysmon</strong>, <strong>Windows Server 2025 AD</strong>,
+          <strong>Windows 11</strong>, <strong>Ubuntu</strong>, <strong>Kali</strong>, and documented attack simulations,
+          investigations, and detection workflows.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#simulations">Explore Attack Simulations</a>
+          <a class="btn btn-secondary" href="#recruiters">Why This Matters</a>
+        </div>
+        <div class="badge-row">
+          <span class="badge">Active Directory</span>
+          <span class="badge">Wazuh SIEM</span>
+          <span class="badge">Security Onion IDS</span>
+          <span class="badge">Sysmon Telemetry</span>
+          <span class="badge">MITRE ATT&CK</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <span class="tag">Lab Snapshot</span>
+        <h3>Multi-Layer Monitoring Architecture</h3>
+        <p>
+          Endpoint telemetry, network visibility, SIEM correlation, and purple-team attack simulations all in one documented environment.
+        </p>
+        <div class="hero-metrics">
+          <div class="metric">
+            <div class="value">6</div>
+            <div class="label">Core Systems Integrated</div>
+          </div>
+          <div class="metric">
+            <div class="value">3</div>
+            <div class="label">Monitoring Layers</div>
+          </div>
+          <div class="metric">
+            <div class="value">6+</div>
+            <div class="label">Attack Simulations Documented</div>
+          </div>
+          <div class="metric">
+            <div class="value">MITRE</div>
+            <div class="label">Technique Mapping Included</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Core Environment</h2>
+          <p>The lab is structured like a small enterprise network with layered monitoring across identity, endpoints, Linux, and network traffic.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">Identity</span>
+          <h3>Windows Server 2025 DC01</h3>
+          <p>Active Directory, DNS, DHCP, authentication source, and one of the highest-value monitored assets in the environment.</p>
+          <ul class="clean">
+            <li><strong>Hostname:</strong> dc01</li>
+            <li><strong>IP:</strong> 192.168.117.130</li>
+            <li><strong>Domain:</strong> corp.local</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Endpoint</span>
+          <h3>Win11Client</h3>
+          <p>Domain-joined workstation instrumented with Sysmon and Wazuh agent to generate endpoint telemetry and user activity.</p>
+          <ul class="clean">
+            <li><strong>Hostname:</strong> Win11Client</li>
+            <li><strong>IP:</strong> 192.168.117.100</li>
+            <li><strong>Monitoring:</strong> Wazuh + Sysmon</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Linux</span>
+          <h3>Ubuntu Server</h3>
+          <p>Monitored Linux host used for SSH attack simulations, authentication logging, and Linux-side SIEM validation.</p>
+          <ul class="clean">
+            <li><strong>Hostname:</strong> ubuntu</li>
+            <li><strong>IP:</strong> 192.168.117.129</li>
+            <li><strong>Key Log:</strong> /var/log/auth.log</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Architecture at a Glance</h2>
+          <p>Security Onion provides network visibility while Wazuh and Sysmon provide host visibility. Kali generates controlled adversary activity to validate detections.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="architecture-box">Kali Linux (Attacker)
+      |
+      |   scans / brute force / SMB / PowerShell simulations
+      v
++----------------------- Internal Lab Network 192.168.117.0/24 -----------------------+
+|                                                                                      |
+|  DC01 (AD DS / DNS / DHCP) ----> Wazuh Manager (192.168.117.50)                      |
+|  Win11Client ---------------> Wazuh Manager (Windows logs + Sysmon)                  |
+|  Ubuntu Server -------------> Wazuh Manager (auth.log + Linux logs)                  |
+|                                                                                      |
+|  All east-west traffic -------------------------------> Security Onion                |
+|                                                      (Suricata + Zeek + NSM)         |
++--------------------------------------------------------------------------------------+</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="detections">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Detection Stack</h2>
+          <p>Each alert can be investigated from multiple angles: Windows security logs, Sysmon process telemetry, Linux authentication logs, Zeek metadata, and Suricata IDS alerts.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">SIEM</span>
+          <h3>Wazuh</h3>
+          <p>Central log collection, rule-based alerting, agent management, and investigation starting point for SOC workflows.</p>
+          <ul class="clean">
+            <li>Windows Event IDs 4624 / 4625 / 4672 / 4698</li>
+            <li>Linux auth.log ingestion</li>
+            <li>Custom rule support</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Endpoint</span>
+          <h3>Sysmon</h3>
+          <p>High-fidelity endpoint visibility on Windows systems including process creation, network connections, and registry modifications.</p>
+          <ul class="clean">
+            <li>Event ID 1 — Process creation</li>
+            <li>Event ID 3 — Network connections</li>
+            <li>Event ID 13 — Registry changes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Network</span>
+          <h3>Security Onion</h3>
+          <p>Network IDS and metadata platform used to identify scans, suspicious traffic patterns, and connection behavior during attacks.</p>
+          <ul class="clean">
+            <li>Suricata IDS alerts</li>
+            <li>Zeek connection metadata</li>
+            <li>Packet visibility for investigations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulations">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Attack Simulations</h2>
+          <p>Each simulation is documented with attack execution, logs generated, expected detections, and screenshots to capture for evidence.</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">01</div>
+          <div>
+            <h3>Reconnaissance</h3>
+            <p><strong>Command:</strong> <code>nmap -sS 192.168.117.0/24</code></p>
+            <p>Detected by Security Onion through Suricata scan alerts and Zeek connection logs.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">02</div>
+          <div>
+            <h3>Brute Force</h3>
+            <p><strong>Linux:</strong> Hydra SSH brute force against Ubuntu. <strong>Windows:</strong> repeated failed logons generating Event ID 4625.</p>
+            <p>Detected by Wazuh, Linux auth logs, Windows Security logs, and Security Onion SSH traffic analysis.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">03</div>
+          <div>
+            <h3>Lateral Movement</h3>
+            <p><strong>Command:</strong> <code>net use \\192.168.117.130\c$</code></p>
+            <p>Detected through Event ID 4624, SMB session traces, Sysmon network events, and Wazuh correlation.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">04</div>
+          <div>
+            <h3>Privilege Escalation & Persistence</h3>
+            <p><strong>Commands:</strong> <code>whoami /priv</code>, <code>runas</code>, <code>schtasks /create ...</code></p>
+            <p>Detected through Event IDs 4672 and 4698 plus Sysmon process telemetry and Wazuh rules.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Detection Engineering & Investigation</h2>
+          <p>The project is not only about building tools. It demonstrates how alerts are validated, correlated, and investigated like a real SOC analyst would do.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag">Engineering</span>
+          <h3>What Is Documented</h3>
+          <ul class="clean">
+            <li>Detection strategy across host and network telemetry</li>
+            <li>Wazuh rules and Sysmon event mapping</li>
+            <li>Security Onion hunt methodology</li>
+            <li>MITRE ATT&CK coverage matrix</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Investigation</span>
+          <h3>Case Workflows</h3>
+          <ul class="clean">
+            <li>SSH brute-force case investigation</li>
+            <li>Windows failed logon investigation</li>
+            <li>Suspicious PowerShell review process</li>
+            <li>Incident and weekly SOC report templates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recruiters">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Why Recruiters Should Care</h2>
+          <p>This project demonstrates hands-on ability across infrastructure, monitoring, attack simulation, troubleshooting, and SOC analyst workflows.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">Build</span>
+          <h3>Infrastructure Skills</h3>
+          <p>Active Directory, DNS, DHCP, Windows and Linux administration, VM preparation, endpoint onboarding, and SIEM deployment.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Operate</span>
+          <h3>Detection Skills</h3>
+          <p>SIEM correlation, Sysmon analysis, Linux log monitoring, network IDS review, and ATT&CK-aligned investigation workflows.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Troubleshoot</span>
+          <h3>Real Problem Solving</h3>
+          <p>Resolved dual-NIC DNS failures, agent version mismatch, duplicate IP registration, and Wazuh database socket issues.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="card footer-card">
+        <div>
+          <h3 style="margin:0 0 8px;">Enterprise AD SOC Lab</h3>
+          <div style="color:var(--muted); line-height:1.7;">Built for GitHub Pages, recruiter review, and SOC interview discussions.</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge">Responsive UI</span>
+          <span class="badge">GitHub Pages Ready</span>
+          <span class="badge">Recruiter Friendly</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
