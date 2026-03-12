@@ -82,16 +82,18 @@ Security monitoring is performed using:
 
 ---
 
-| Technology | 
+| Endpoint Activity | 
 |-------------|
 | ▼ | 
-| Windows 11 | 
+| Logs Generated | 
 | ▼ | 
-| Kali Linux |
+| Wazuh Agents Collect Logs |
 | ▼ | 
-| Security Onion |
+| Wazuh Manager Correlates Events |
 | ▼ |
-| Docker |
+| Security Onion Monitors Network Traffic |
+| ▼ | 
+| SOC Analyst Investigates Alerts |
 
 ---
 
