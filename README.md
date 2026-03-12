@@ -84,13 +84,13 @@ Security monitoring is performed using:
 
 | Technology | 
 |-------------|
-| Windows Server 2025 | 
+| ▼ | 
 | Windows 11 | 
-| Ubuntu Server | 
+| ▼ | 
 | Kali Linux |
-| Wazuh | 
+| ▼ | 
 | Security Onion |
-| Sysmon |
+| ▼ |
 | Docker |
 
 ---
