@@ -490,14 +490,14 @@
       |   scans / brute force / SMB / PowerShell simulations
       v
 +----------------------- Internal Lab Network 192.168.117.0/24 -----------------------+
-|                                                                                      |
-|  DC01 (AD DS / DNS / DHCP) ----> Wazuh Manager (192.168.117.50)                      |
-|  Win11Client ---------------> Wazuh Manager (Windows logs + Sysmon)                  |
-|  Ubuntu Server -------------> Wazuh Manager (auth.log + Linux logs)                  |
-|                                                                                      |
-|  All east-west traffic -------------------------------> Security Onion                |
-|                                                      (Suricata + Zeek + NSM)         |
-+--------------------------------------------------------------------------------------+</div>
+|                                                                                     |
+|  DC01 (AD DS / DNS / DHCP) ----> Wazuh Manager (192.168.117.50)                     |
+|  Win11Client ---------------> Wazuh Manager (Windows logs + Sysmon)                 |
+|  Ubuntu Server -------------> Wazuh Manager (auth.log + Linux logs)                 |
+|                                                                                     |
+|  All east-west traffic -------------------------------> Security Onion              |
+|                                                      (Suricata + Zeek + NSM)        |
++-------------------------------------------------------------------------------------+</div>
       </div>
     </div>
   </section>
